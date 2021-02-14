@@ -1,0 +1,28 @@
+{
+  "name": "airtable-schema",
+  "version": "1.0.0",
+  "description": "Workaround to retrieve the Base schema from Airtable. Waiting for improvements on Metadata API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xavivaldes/airtable-schema.git"
+  },
+  "keywords": [
+    "Airtable",
+    "Schema",
+    "Metadata",
+    "API"
+  ],
+  "author": "Xavi Valdés",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xavivaldes/airtable-schema/issues"
+  },
+  "homepage": "https://github.com/xavivaldes/airtable-schema#readme",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  }
+}
