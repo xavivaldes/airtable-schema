@@ -2,7 +2,7 @@
 Workaround to retrieve the Base schema from Airtable. Waiting for improvements on Metadata API.
 
 ## How it works
-The functionality is really basic. It uses the Web Client API of airtable to retrieve the schema. You can just perform this fetch:
+The functionality is really basic. It uses the Web Client API of Airtable to retrieve the schema. You can just perform this fetch:
 ```
 fetch(`https://airtable.com/v0.3/application/${baseId}/read`, {
     "headers": {
@@ -19,11 +19,8 @@ Using your Base Id and the specific Cookies than you can see on Chrome Developme
 
 Or if you prefer you can use this library, that performs the fetch for you.
 
-## Installation
-`npm install airtable-schema`
-
 ## Finding out the cookies
-Before to use this library (or to perform the fetch manually), you need to find out two cookis. You can follow these steps:
+Before to use this library (or to perform the fetch manually), you need to find out two cookies. You can follow these steps:
 1. Go to airtable http://airtable.com
 2. Open Developer tools (F12)
 3. Open Network tab in Developer tools
@@ -32,18 +29,20 @@ Before to use this library (or to perform the fetch manually), you need to find 
 6. Inspect the cookies on Request Headers
 7. Look for these Cookies, and save the values:
 ```
-__Host-airtable-session=sasdkfjkKDFKKDJF204IJFISLKFJIJ934JO8JFNAKJkjfij034jfLNJ09J0f0j4F4FLj94fj4LJF94wjg09JWLF9j9PJP
-__Host-airtable-session.sig=KJDSLKAJFNijkjkjsldkjlfhesijf93jslkdjflkjijLJLIJSLGJ
+__Host-airtable-session=your_host_airtable_session_value
+__Host-airtable-session.sig=your_host_airtable_session_SIG_value
 ```
+## Installation
+`npm install -s airtable-schema`
 
 ## Configuration
 Now you can configure the library. There are three options to configure.
 
 ### Environment variables
-You can set these two Environment variables with the Cookie values
+You can set these two Environment Variables with the Cookie values
 ```
-AIRTABLE_SESSION=sasdkfjkKDFKKDJF204IJFISLKFJIJ934JO8JFNAKJkjfij034jfLNJ09J0f0j4F4FLj94fj4LJF94wjg09JWLF9j9PJP
-AIRTABLE_SESSION_SIG=KJDSLKAJFNijkjkjsldkjlfhesijf93jslkdjflkjijLJLIJSLGJ
+AIRTABLE_SESSION=your_host_airtable_session_value
+AIRTABLE_SESSION_SIG=your_host_airtable_session_SIG_value
 ```
 
 ### Calling configureSession
@@ -52,44 +51,54 @@ You can call `configureSession` function
 const airtableschema = require('airtable-schema');
 
 airtableschema.configureSession({
-    airtableSession: "sasdkfjkKDFKKDJF204IJFISLKFJIJ934JO8JFNAKJkjfij034jfLNJ09J0f0j4F4FLj94fj4LJF94wjg09JWLF9j9PJP",
-    airtableSessionSig: "AIRTABLE_SESSION_SIGKJDSLKAJFNijkjkjsldkjlfhesijf93jslkdjflkjijLJLIJSLGJ"
+    airtableSession: "your_host_airtable_session_value",
+    airtableSessionSig: "your_host_airtable_session_SIG_value"
 });
 ```
 
 ### Parameters in the methods
 Or you can pass the two parameters each time you call a method.
 
-# Usage
+## Usage
+Using `configureSession`:
 ```
-const airtableschema = require('./index');
+const airtableschema = require('airtable-schema');
 
 airtableschema.configureSession({
-    airtableSession: "sasdkfjkKDFKKDJF204IJFISLKFJIJ934JO8JFNAKJkjfij034jfLNJ09J0f0j4F4FLj94fj4LJF94wjg09JWLF9j9PJP",
-    airtableSessionSig: "KJDSLKAJFNijkjkjsldkjlfhesijf93jslkdjflkjijLJLIJSLGJ"
+    airtableSession: "your_host_airtable_session_value",
+    airtableSessionSig: "your_host_airtable_session_SIG_value"
 });
 
 airtableschema.getBaseSchema({
     baseId: "appASDFSADFASDF"
 }).then(res => console.log(JSON.stringify(res, null, 2)));
 ```
-or
+Or, passing the session as parameters:
 ```
-const airtableschema = require('./index');
+const airtableschema = require('airtable-schema');
 
 airtableschema.getBaseSchema({
     baseId: "appASDFSADFASDF",
-    airtableSession: "sasdkfjkKDFKKDJF204IJFISLKFJIJ934JO8JFNAKJkjfij034jfLNJ09J0f0j4F4FLj94fj4LJF94wjg09JWLF9j9PJP",
-    airtableSessionSig: "KJDSLKAJFNijkjkjsldkjlfhesijf93jslkdjflkjijLJLIJSLGJ"
+    airtableSession: "your_host_airtable_session_value",
+    airtableSessionSig: "your_host_airtable_session_SIG_value"
+}).then(res => console.log(JSON.stringify(res, null, 2)));
+```
+Or, if you have setted the Environment Variables:
+```
+const airtableschema = require('airtable-schema');
+
+airtableschema.getBaseSchema({
+    baseId: "appASDFSADFASDF"
 }).then(res => console.log(JSON.stringify(res, null, 2)));
 ```
 
-There are three methods available:
+## Methods
+There are three available methods:
 1. `getBaseSchema(options)`: returns the Schema of your base, including all the tables and columns.
 2. `getTableSchema(options)`: returns the Schema of one table, including all the columns.
 3. `getColumnSchema(options)`: returns the Schema of one column of one table.
 
-`options` has this possible parameters:
+`options` has these possible parameters:
 ```
 {
     baseId, 
