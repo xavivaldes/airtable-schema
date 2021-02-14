@@ -1,6 +1,6 @@
 {
   "name": "airtable-schema",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Workaround to retrieve the Base schema from Airtable. Waiting for improvements on Metadata API.",
   "main": "index.js",
   "scripts": {
