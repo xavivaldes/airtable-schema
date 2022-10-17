@@ -1,4 +1,6 @@
 # airtable-schema
+> :warning: **Official API available**: You can use now the official Airtable Metadata API. Documentation here: https://airtable.com/api/meta
+
 Workaround to retrieve the Base schema from Airtable. Waiting for improvements on Metadata API.
 
 ## How it works
